@@ -12,7 +12,7 @@
   <SidebarProvider v-else>
     <Sidebar />
     <main>
-      <SidebarTrigger />
+      <InsetHeader />
       <RouterView />
     </main>
   </SidebarProvider>
@@ -24,11 +24,12 @@ import { app } from './firebase';
 import { Button } from './components/ui/button';
 import Sonner from './components/ui/sonner/Sonner.vue';
 import { toast } from 'vue-sonner';
-import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
+import { SidebarProvider } from './components/ui/sidebar';
 import Sidebar from './components/dashboard/Sidebar.vue';
 import { onMounted, ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useColorMode } from '@vueuse/core';
+import InsetHeader from './components/dashboard/InsetHeader.vue';
 
 const color = useColorMode();
 
@@ -52,7 +53,6 @@ console.log(auth.currentUser);
 function login() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
-    console.log(result);
     toast("Logged in!!", {
       description: `Successfully logged in as ${result.user.displayName}`
     })
